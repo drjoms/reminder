@@ -16,18 +16,18 @@ desired_reminder=$( echo $* |awk '{$1=""; print $0 }' )
 #echo desired reminder is: $desired_reminder
 if ! test -z "$desired_reminder" ;
 then
-    echo reminder is not empty
+#    echo reminder is not empty
     time=$(date +%s)
-    echo $time
+#    echo $time
     inputz=$1
     delay=$(( $inputz * 60 ))
 #    delay=$(( $inputz * 1 ))
 
     #echo $delay
     desired_time=$(( $time + $delay ))
-    echo desired time $desired_time
+#    echo desired time $desired_time
     saved_line="$desired_time $desired_reminder"
-    echo saved line is $saved_line
+#    echo saved line is $saved_line
     echo $saved_line >> ~/.reminder/reminder.date
     sort -r -o ~/.reminder/reminder.date ~/.reminder/reminder.date
 
@@ -36,7 +36,7 @@ fi
 
 last_line=$(tail -n 1  ~/.reminder/reminder.date 2>>/dev/null)
 #gotta be careful here, not sure if sort -r does not add new line, making '-z' always true
-if tail -n 1  ~/.reminder/reminder.date 2>>/dev/null 
+if tail -n 1  ~/.reminder/reminder.date 2>>/dev/null >>/dev/null
 then
 #    echo last line is: $last_line
     desired_time=$(echo $last_line | awk '{print $1}')
